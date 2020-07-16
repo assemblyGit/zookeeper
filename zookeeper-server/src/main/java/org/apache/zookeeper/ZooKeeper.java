@@ -622,7 +622,7 @@ public class ZooKeeper implements AutoCloseable {
 
     @InterfaceAudience.Public
     public enum States {
-        CONNECTING, ASSOCIATING, CONNECTED, CONNECTEDREADONLY,
+        CONNECTING, ASSOCIATING, CONNECTED, CONNECTEDREADONLY,/**连接的server返回readonly*/
         CLOSED, AUTH_FAILED, NOT_CONNECTED;
 
         public boolean isAlive() {
@@ -843,7 +843,7 @@ public class ZooKeeper implements AutoCloseable {
      *            session timeout in milliseconds
      * @param watcher
      *            a watcher object which will be notified of state changes, may
-     *            also be notified for node events
+     *            also be notified for node events    默认watch
      * @param canBeReadOnly
      *            (added in 3.4) whether the created client is allowed to go to
      *            read-only mode in case of partitioning. Read-only mode

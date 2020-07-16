@@ -92,7 +92,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 
-/**
+/**    <p>ClientCnxn 管理可用server列表,并且进行透明切换</p>
  * This class manages the socket i/o for the client. ClientCnxn maintains a list
  * of available servers to connect to and "transparently" switches servers it is
  * connected to as needed.
@@ -126,11 +126,11 @@ public class ClientCnxn {
     private final CopyOnWriteArraySet<AuthData> authInfo = new CopyOnWriteArraySet<AuthData>();
 
     /**
-     * These are the packets that have been sent and are waiting for a response.
+     * These are the packets that have been sent and are waiting for a response.  已经发送待处理
      */
     private final LinkedList<Packet> pendingQueue = new LinkedList<Packet>();
 
-    /**
+    /**   <p>待发送列表</p>
      * These are the packets that need to be sent.
      */
     private final LinkedBlockingDeque<Packet> outgoingQueue = new LinkedBlockingDeque<Packet>();
@@ -1051,7 +1051,7 @@ public class ClientCnxn {
             RequestHeader h = new RequestHeader(-2, OpCode.ping);
             queuePacket(h, null, null, null, null, null, null, null, null);
         }
-
+        /**读写server的地址*/
         private InetSocketAddress rwServerAddress = null;
 
         private final static int minPingRwTimeout = 100;
@@ -1335,7 +1335,7 @@ public class ClientCnxn {
         }
 
         private void cleanup() {
-            clientCnxnSocket.cleanup();
+            clientCnxnSocket.cleanup();//这里会关闭当前连接,这样连接状态会变为未连接的
             synchronized (pendingQueue) {
                 for (Packet p : pendingQueue) {
                     conLossPacket(p);

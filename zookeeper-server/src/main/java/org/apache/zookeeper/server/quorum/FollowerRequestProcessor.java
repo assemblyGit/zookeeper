@@ -98,7 +98,7 @@ public class FollowerRequestProcessor extends ZooKeeperCriticalThread implements
                 case OpCode.createSession:
                 case OpCode.closeSession:
                     // Don't forward local sessions to the leader.
-                    if (!request.isLocalSession()) {
+                    if (!request.isLocalSession()) {//不将local session 转发到leader
                         zks.getFollower().request(request);
                     }
                     break;

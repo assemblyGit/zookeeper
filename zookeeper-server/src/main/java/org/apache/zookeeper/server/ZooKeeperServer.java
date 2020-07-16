@@ -680,7 +680,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         ByteBuffer to = ByteBuffer.allocate(4);
         to.putInt(timeout);
         cnxn.setSessionId(sessionId);
-        Request si = new Request(cnxn, sessionId, 0, OpCode.createSession, to, null);
+        Request si = new Request(cnxn, sessionId, 0, OpCode.createSession, to, null);//创建session请求
         setLocalSessionFlag(si);
         submitRequest(si);
         return sessionId;
@@ -1005,7 +1005,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         }
         boolean readOnly = false;
         try {
-            readOnly = bia.readBool("readOnly");
+            readOnly = bia.readBool("readOnly");//处理连接请求
             cnxn.isOldClient = false;
         } catch (IOException e) {
             // this is ok -- just a packet from an old client which

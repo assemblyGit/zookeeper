@@ -517,7 +517,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
         return x509Util;
     }
 
-    /**
+    /**   <p>当前投票的结果</p>
      * This is who I think the leader currently is.
      */
     volatile private Vote currentVote;
@@ -537,7 +537,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
      */
     protected int tickTime;
 
-    /**
+    /**   <p>创建本地session</p>
      * Whether learners in this quorum should create new sessions as local.
      * False by default to preserve existing behavior.
      */
@@ -678,7 +678,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
                         responseBuffer.getInt(); // Skip the xid
                         responseBuffer.putLong(myid);
                         Vote current = getCurrentVote();
-                        switch (getPeerState()) {
+                        switch (getPeerState()) {//获取当前状态
                         case LOOKING:
                             responseBuffer.putLong(current.getId());
                             responseBuffer.putLong(current.getZxid());
@@ -977,7 +977,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
        // if (!getView().containsKey(myid)) {
       //      throw new RuntimeException("My id " + myid + " not in the peer list");
         //}
-        if (electionType == 0) {
+        if (electionType == 0) { //如果选举类型算法是0
             try {
                 udpSocket = new DatagramSocket(getQuorumAddress().getPort());
                 responder = new ResponderThread();
@@ -1313,7 +1313,7 @@ public class QuorumPeer extends ZooKeeperThread implements QuorumStats.Provider 
     }
 
     private synchronized void updateServerState(){
-       if (!reconfigFlag) {
+       if (!reconfigFlag) {//如果config未发生变更
            setPeerState(ServerState.LOOKING);
            LOG.warn("PeerState set to LOOKING");
            return;

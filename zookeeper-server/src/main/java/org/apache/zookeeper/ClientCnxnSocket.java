@@ -142,7 +142,7 @@ abstract class ClientCnxnSocket {
         // read "is read-only" flag
         boolean isRO = false;
         try {
-            isRO = bbia.readBool("readOnly");
+            isRO = bbia.readBool("readOnly");//链接的服务端会返回是否只读
         } catch (IOException e) {
             // this is ok -- just a packet from an old server which
             // doesn't contain readOnly field
@@ -203,7 +203,7 @@ abstract class ClientCnxnSocket {
      *
      * @param waitTimeOut timeout in blocking wait. Unit in MilliSecond.
      * @param pendingQueue These are the packets that have been sent and
-     *                     are waiting for a response.
+     *                     are waiting for a response.  已经发送待处理
      * @param cnxn
      * @throws IOException
      * @throws InterruptedException

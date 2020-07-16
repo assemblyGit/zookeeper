@@ -159,7 +159,7 @@ public final class StaticHostProvider implements HostProvider {
     private List<InetSocketAddress> shuffle(Collection<InetSocketAddress> serverAddresses) {
         List<InetSocketAddress> tmpList = new ArrayList<>(serverAddresses.size());
         tmpList.addAll(serverAddresses);
-        Collections.shuffle(tmpList, sourceOfRandomness);
+        Collections.shuffle(tmpList, sourceOfRandomness);//洗牌算法
         return tmpList;
     }
 

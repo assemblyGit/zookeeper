@@ -44,7 +44,7 @@ public class ClientCnxnSocketNIO extends ClientCnxnSocket {
 
     private final Selector selector = Selector.open();
 
-    private SelectionKey sockKey;
+    private SelectionKey sockKey;//判断是否连接到server
 
     private SocketAddress localSocketAddress;
 

@@ -365,7 +365,7 @@ public class NIOServerCnxn extends ServerCnxn {
         } catch (EndOfStreamException e) {
             LOG.warn(e.getMessage());
             // expecting close to log session closure
-            close();
+            close();//warn+close
         } catch (IOException e) {
             LOG.warn("Exception causing close of session 0x"
                      + Long.toHexString(sessionId) + ": " + e.getMessage());
